@@ -2,8 +2,19 @@
 {
     internal class ControlledDevice : IObservable
     {
+        #region Public Fields
+
         public Metrics metrics;
-        List<IObserver> observers;
+
+        #endregion Public Fields
+
+        #region Private Fields
+
+        private List<IObserver> observers;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public ControlledDevice()
         {
@@ -11,17 +22,9 @@
             metrics = new Metrics();
         }
 
-        public void Notify()
-        {
-            foreach(var observer in observers) 
-            {
-                observer.Update(metrics);
-            }
-        }
+        #endregion Public Constructors
 
-        public void Register(IObserver observer) => observers.Add(observer);
-
-        public void Remove(IObserver observer) => observers.Remove(observer);
+        #region Public Methods
 
         public void ImitationWork()
         {
@@ -31,5 +34,19 @@
 
             Notify();
         }
+
+        public void Notify()
+        {
+            foreach (var observer in observers)
+            {
+                observer.Update(metrics);
+            }
+        }
+
+        public void Register(IObserver observer) => observers.Add(observer);
+
+        public void Remove(IObserver observer) => observers.Remove(observer);
+
+        #endregion Public Methods
     }
 }
